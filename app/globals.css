@@ -184,9 +184,3 @@
   animation: confetti linear forwards;
 }
 
-/* Mobile-specific improvements */
-@media (max-width: 640px) {
-  .christmas-stripe {
-    background-size: 40px 40px;
-  }
-}

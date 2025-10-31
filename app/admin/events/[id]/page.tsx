@@ -44,6 +44,8 @@ export default async function EventPage({ params }: EventPageProps) {
       )
       .eq("event_id", id)
 
+    const hidePairingsFromAdmins = event.hide_pairings_from_admins;
+
     return (
       <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
         <Snowfall />
@@ -55,7 +57,7 @@ export default async function EventPage({ params }: EventPageProps) {
               Back to Events
             </Link>
           </Button>
-          <EventDetails event={event} participants={participants || []} pairings={pairings || []} />
+          <EventDetails event={event} participants={participants || []} pairings={pairings || []} hidePairingsFromAdmins={hidePairingsFromAdmins} />
         </main>
       </div>
     )

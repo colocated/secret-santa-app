@@ -30,9 +30,10 @@ interface EventDetailsProps {
     receiver: { id: string; name: string }
     revealed: boolean
   }>
+  hidePairingsFromAdmins: boolean
 }
 
-export function EventDetails({ event, participants, pairings }: EventDetailsProps) {
+export function EventDetails({ event, participants, pairings, hidePairingsFromAdmins }: EventDetailsProps) {
   const [activeTab, setActiveTab] = useState("participants")
 
   return (
@@ -80,7 +81,7 @@ export function EventDetails({ event, participants, pairings }: EventDetailsProp
           <ParticipantsManager eventId={event.id} participants={participants} />
         </TabsContent>
         <TabsContent value="pairings">
-          <PairingsManager eventId={event.id} participants={participants} pairings={pairings} />
+          <PairingsManager eventId={event.id} participants={participants} pairings={pairings} hidePairingsFromAdmins={hidePairingsFromAdmins} />
         </TabsContent>
         <TabsContent value="rules">
           <RulesManager eventId={event.id} rules={event.rules} />

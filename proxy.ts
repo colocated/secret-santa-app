@@ -2,7 +2,7 @@ import { updateSession } from "@/lib/supabase/middleware"
 import { type NextRequest, NextResponse } from "next/server"
 import { cookies } from "next/headers"
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const cookieStore = await cookies()
   let locale = cookieStore.get("NEXT_LOCALE")?.value
 

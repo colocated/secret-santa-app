@@ -36,8 +36,23 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Store or update admin user in database
     const supabase = await createClient()
+
+    // Check if user is an approved admin
+    const { data: admin, error: adminError } = await supabase
+      .from("admin_users")
+      .select("*")
+      .eq("discord_id", discordUser.id)
+      .single()
+
+    console.log(adminError, admin)
+    if (adminError || !admin) {
+      return NextResponse.redirect(
+        new URL(`/admin/login?error=${encodeURIComponent("You are not an approved admin for this instance")}`, request.url),
+      )
+    }
+
+    // Store or update admin user in database
     const { error: dbError } = await supabase.from("admin_users").upsert(
       {
         discord_id: discordUser.id,

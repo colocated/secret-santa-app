@@ -30,6 +30,21 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(new URL(`/admin/login?error=${encodeURIComponent("You are not an approved admin for this instance")}`, request.url))
     }
 
+    // Store or update admin user in database
+    const { error: dbError } = await supabase.from("admin_users").upsert(
+      {
+        google_email: googleUser.email,
+        google_id: googleUser.id,
+      },
+      {
+        onConflict: "google_email",
+      },
+    )
+
+    if (dbError) {
+      console.error("Error storing admin user:", dbError)
+    }
+
     // Create session
     const cookieStore = await cookies()
     cookieStore.set(

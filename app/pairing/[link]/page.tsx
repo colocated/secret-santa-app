@@ -52,7 +52,9 @@ export default async function PairingPage({ params }: PairingPageProps) {
           <AuthCodeVerification
             participantId={participant.id}
             participantName={participant.name}
-            eventTitle={event.title}
+            onVerified={() => {
+              cookieStore.set(`verified_${participant.id}`, "true", { path: "/", maxAge: 60 * 60 * 24 * 7 })
+            }}
           />
         </main>
       </div>

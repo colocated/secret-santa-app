@@ -23,7 +23,7 @@ export function LanguageSwitcher() {
   const switchLanguage = (newLocale: string) => {
     startTransition(() => {
       // Set cookie for locale
-      Cookies.set("NEXT_LOCALE", newLocale, { expires: 365 })
+      Cookies.set("locale", newLocale, { expires: 365 })
       // Refresh to apply new locale
       router.refresh()
     })

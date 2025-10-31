@@ -113,9 +113,7 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
               <Button
                 onClick={handleReveal}
                 disabled={isAnimating}
-                className={`group relative h-40 w-40 rounded-3xl border-4 border-christmas-red bg-linear-to-br from-christmas-red to-christmas-red/80 p-0 shadow-2xl transition-all hover:scale-105 hover:shadow-christmas-red/50 sm:h-48 sm:w-48 ${
-                  isAnimating ? "animate-pulse" : "hover:animate-bounce"
-                }`}
+                className={`group relative h-40 w-40 rounded-3xl border-4 border-christmas-red bg-linear-to-br from-christmas-red to-christmas-red/80 p-0 shadow-2xl transition-all hover:scale-105 hover:shadow-christmas-red/50 sm:h-48 sm:w-48 animate-pulse`}
               >
                 <div className="flex flex-col items-center gap-2">
                   <span className={`text-7xl transition-transform sm:text-8xl ${isSpinning ? "animate-spin" : ""}`}>
@@ -123,9 +121,6 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
                   </span>
                   {!isSpinning && <span className="text-base font-bold text-white sm:text-xl">{t("clickToOpen")}</span>}
                 </div>
-                {/* Ribbon */}
-                <div className="absolute left-1/2 top-0 h-full w-3 -translate-x-1/2 bg-christmas-gold opacity-80 sm:w-4" />
-                <div className="absolute left-0 top-1/2 h-3 w-full -translate-y-1/2 bg-christmas-gold opacity-80 sm:h-4" />
               </Button>
             ) : (
               <div className="animate-in fade-in zoom-in duration-1000 space-y-4 text-center">

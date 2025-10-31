@@ -17,34 +17,37 @@ export default function SetupOwnerPage() {
   const [isVerifying, setIsVerifying] = useState(false)
 
   const handleClaimOwnership = async () => {
-    if (!code) {
-      toast.error("Please enter the owner code")
-      return
-    }
-
-    setIsVerifying(true)
-
-    try {
-      const response = await fetch("/api/admin/claim-ownership", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code }),
-      })
-
-      if (!response.ok) {
-        toast.error(t("invalidOwnerCode"))
-        return
-      }
-
-      toast.success("Ownership claimed successfully!")
-      router.push("/admin")
-    } catch (error) {
-      console.error("Error claiming ownership:", error)
-      toast.error("Failed to claim ownership")
-    } finally {
-      setIsVerifying(false)
-    }
+    return toast.error("This feature has been temporarily disabled for maintenance.")
   }
+  // const handleClaimOwnership = async () => {
+  //   if (!code) {
+  //     toast.error("Please enter the owner code")
+  //     return
+  //   }
+
+  //   setIsVerifying(true)
+
+  //   try {
+  //     const response = await fetch("/api/admin/claim-ownership", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ code }),
+  //     })
+
+  //     if (!response.ok) {
+  //       toast.error(t("invalidOwnerCode"))
+  //       return
+  //     }
+
+  //     toast.success("Ownership claimed successfully!")
+  //     router.push("/admin")
+  //   } catch (error) {
+  //     console.error("Error claiming ownership:", error)
+  //     toast.error("Failed to claim ownership")
+  //   } finally {
+  //     setIsVerifying(false)
+  //   }
+  // }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-b from-blue-50 to-white p-4">

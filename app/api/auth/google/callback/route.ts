@@ -2,7 +2,6 @@ import { type NextRequest, NextResponse } from "next/server"
 import { exchangeGoogleCode, getGoogleUser } from "@/lib/google-auth"
 import { createClient } from "@/lib/supabase/server"
 import { cookies } from "next/headers"
-import { generateSystemOwnerCode, logSystemOwnerCode } from "@/lib/system-owner"
 
 export async function GET(request: NextRequest) {
   try {
@@ -19,39 +18,6 @@ export async function GET(request: NextRequest) {
     const googleUser = await getGoogleUser(accessToken)
 
     const supabase = await createClient()
-
-    // Check if this is the first admin (system owner setup)
-    const { data: existingAdmins, error: countError } = await supabase.from("admin_users").select("id").limit(1)
-
-    if (countError) {
-      console.error("Error checking admin count:", countError)
-      return NextResponse.redirect(new URL("/admin/login?error=database_error", request.url))
-    }
-
-    const isFirstAdmin = !existingAdmins || existingAdmins.length === 0
-
-    if (isFirstAdmin) {
-      // Generate system owner code and show in console
-      const ownerCode = generateSystemOwnerCode()
-      logSystemOwnerCode(ownerCode)
-
-      // Store the code in system settings
-      await supabase.from("system_settings").upsert({
-        key: "system_owner_code",
-        value: ownerCode,
-      })
-
-      // Redirect to system owner setup page
-      const cookieStore = await cookies()
-      cookieStore.set("pending_google_user", JSON.stringify(googleUser), {
-        maxAge: 600, // 10 minutes
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-      })
-
-      return NextResponse.redirect(new URL("/admin/setup-owner", request.url))
-    }
 
     // Check if user is an approved admin
     const { data: admin, error: adminError } = await supabase

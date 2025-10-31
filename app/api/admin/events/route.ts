@@ -32,13 +32,13 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (error) {
-      console.error("[v0] Error creating event:", error)
+      console.error("Error creating event:", error)
       return NextResponse.json({ error: "Failed to create event" }, { status: 500 })
     }
 
     return NextResponse.json({ event })
   } catch (error) {
-    console.error("[v0] Error in create event API:", error)
+    console.error("Error in create event API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

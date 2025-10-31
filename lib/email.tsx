@@ -15,7 +15,7 @@ export async function sendEmail(message: EmailMessage): Promise<boolean> {
     const fromName = process.env.SMTP_FROM_NAME || "Secret Santa"
 
     if (!smtpHost || !smtpPort || !smtpUser || !smtpPassword || !fromEmail) {
-      console.error("[v0] SMTP credentials not configured")
+      console.error("SMTP credentials not configured")
       return false
     }
 
@@ -45,13 +45,13 @@ export async function sendEmail(message: EmailMessage): Promise<boolean> {
     })
 
     if (!response.ok) {
-      console.error("[v0] Email API error:", await response.text())
+      console.error("Email API error:", await response.text())
       return false
     }
 
     return true
   } catch (error) {
-    console.error("[v0] Error sending email:", error)
+    console.error("Error sending email:", error)
     return false
   }
 }

@@ -15,13 +15,13 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     const { error } = await supabase.from("participants").delete().eq("id", id)
 
     if (error) {
-      console.error("[v0] Error deleting participant:", error)
+      console.error("Error deleting participant:", error)
       return NextResponse.json({ error: "Failed to delete participant" }, { status: 500 })
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Error in delete participant API:", error)
+    console.error("Error in delete participant API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

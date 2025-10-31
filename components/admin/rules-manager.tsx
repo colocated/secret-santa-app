@@ -44,7 +44,7 @@ export function RulesManager({ eventId, rules: initialRules }: RulesManagerProps
       toast.success("Rules saved successfully!")
       router.refresh()
     } catch (error) {
-      console.error("[v0] Error saving rules:", error)
+      console.error("Error saving rules:", error)
       toast.error("Failed to save rules")
     } finally {
       setIsSaving(false)

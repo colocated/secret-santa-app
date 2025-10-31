@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(results)
   } catch (error) {
-    console.error("[v0] Error in send participant links API:", error)
+    console.error("Error in send participant links API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

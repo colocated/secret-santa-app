@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Error in verify auth code API:", error)
+    console.error("Error in verify auth code API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

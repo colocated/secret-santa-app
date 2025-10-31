@@ -53,7 +53,7 @@ export function AuthCodeVerification({ participantId, participantName, onVerifie
       router.refresh()
       onVerified()
     } catch (error) {
-      console.error("[v0] Error verifying code:", error)
+      console.error("Error verifying code:", error)
       toast.error("Failed to verify code")
     } finally {
       setIsVerifying(false)
@@ -76,7 +76,7 @@ export function AuthCodeVerification({ participantId, participantName, onVerifie
 
       toast.success("A new code has been sent to your email/phone")
     } catch (error) {
-      console.error("[v0] Error requesting code:", error)
+      console.error("Error requesting code:", error)
       toast.error("Failed to send code")
     } finally {
       setIsRequesting(false)

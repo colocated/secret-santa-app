@@ -58,7 +58,7 @@ export function PairingsManager({ eventId, participants, pairings, hidePairingsF
       toast.success("Pairings generated successfully!")
       router.refresh()
     } catch (error) {
-      console.error("[v0] Error generating pairings:", error)
+      console.error("Error generating pairings:", error)
       toast.error("Failed to generate pairings")
     } finally {
       setIsGenerating(false)

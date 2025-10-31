@@ -17,13 +17,13 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const { data: event, error } = await supabase.from("events").update({ rules }).eq("id", id).select().single()
 
     if (error) {
-      console.error("[v0] Error updating rules:", error)
+      console.error("Error updating rules:", error)
       return NextResponse.json({ error: "Failed to update rules" }, { status: 500 })
     }
 
     return NextResponse.json({ event })
   } catch (error) {
-    console.error("[v0] Error in update rules API:", error)
+    console.error("Error in update rules API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

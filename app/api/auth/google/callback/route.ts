@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     const { data: existingAdmins, error: countError } = await supabase.from("admin_users").select("id").limit(1)
 
     if (countError) {
-      console.error("[v0] Error checking admin count:", countError)
+      console.error("Error checking admin count:", countError)
       return NextResponse.redirect(new URL("/admin/login?error=database_error", request.url))
     }
 
@@ -84,7 +84,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.redirect(new URL("/admin", request.url))
   } catch (error) {
-    console.error("[v0] Error in Google callback:", error)
+    console.error("Error in Google callback:", error)
     return NextResponse.redirect(new URL("/admin/login?error=google_auth_failed", request.url))
   }
 }

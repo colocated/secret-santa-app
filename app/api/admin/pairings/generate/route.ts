@@ -63,13 +63,13 @@ export async function POST(request: NextRequest) {
     const { error: pairingsError } = await supabase.from("pairings").insert(pairings)
 
     if (pairingsError) {
-      console.error("[v0] Error creating pairings:", pairingsError)
+      console.error("Error creating pairings:", pairingsError)
       return NextResponse.json({ error: "Failed to create pairings" }, { status: 500 })
     }
 
     return NextResponse.json({ success: true, count: pairings.length })
   } catch (error) {
-    console.error("[v0] Error in generate pairings API:", error)
+    console.error("Error in generate pairings API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

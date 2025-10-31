@@ -55,7 +55,7 @@ export function EventSettings({ event }: EventSettingsProps) {
       toast.success("Event updated successfully!")
       router.refresh()
     } catch (error) {
-      console.error("[v0] Error updating event:", error)
+      console.error("Error updating event:", error)
       toast.error("Failed to update event")
     } finally {
       setIsSaving(false)
@@ -76,7 +76,7 @@ export function EventSettings({ event }: EventSettingsProps) {
       router.push("/admin")
       router.refresh()
     } catch (error) {
-      console.error("[v0] Error deleting event:", error)
+      console.error("Error deleting event:", error)
       toast.error("Failed to delete event")
     }
   }

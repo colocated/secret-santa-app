@@ -39,7 +39,7 @@ export default function SetupOwnerPage() {
       toast.success("Ownership claimed successfully!")
       router.push("/admin")
     } catch (error) {
-      console.error("[v0] Error claiming ownership:", error)
+      console.error("Error claiming ownership:", error)
       toast.error("Failed to claim ownership")
     } finally {
       setIsVerifying(false)

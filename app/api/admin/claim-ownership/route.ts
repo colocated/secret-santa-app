@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (adminError) {
-      console.error("[v0] Error creating system owner:", adminError)
+      console.error("Error creating system owner:", adminError)
       return NextResponse.json({ error: "Failed to create system owner" }, { status: 500 })
     }
 
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Error in claim ownership API:", error)
+    console.error("Error in claim ownership API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

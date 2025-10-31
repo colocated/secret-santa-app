@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.redirect(authUrl)
   } catch (error) {
-    console.error("[v0] Error in Google auth:", error)
+    console.error("Error in Google auth:", error)
     return NextResponse.redirect(new URL("/admin/login?error=google_auth_failed", request.url))
   }
 }

@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const authUrl = getDiscordAuthUrl(redirectUri)
     return NextResponse.redirect(authUrl)
   } catch (error) {
-    console.error("[v0] Error in Discord auth route:", error)
+    console.error("Error in Discord auth route:", error)
     return NextResponse.redirect(
       new URL(`/admin/login?error=${encodeURIComponent("Failed to initiate Discord login")}`, request.url),
     )

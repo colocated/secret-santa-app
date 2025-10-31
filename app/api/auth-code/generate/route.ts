@@ -43,13 +43,13 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (authCodeError) {
-      console.error("[v0] Error creating auth code:", authCodeError)
+      console.error("Error creating auth code:", authCodeError)
       return NextResponse.json({ error: "Failed to create auth code" }, { status: 500 })
     }
 
     return NextResponse.json({ authCode, participant })
   } catch (error) {
-    console.error("[v0] Error in generate auth code API:", error)
+    console.error("Error in generate auth code API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

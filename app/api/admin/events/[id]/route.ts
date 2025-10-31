@@ -28,13 +28,13 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       .single()
 
     if (error) {
-      console.error("[v0] Error updating event:", error)
+      console.error("Error updating event:", error)
       return NextResponse.json({ error: "Failed to update event" }, { status: 500 })
     }
 
     return NextResponse.json({ event })
   } catch (error) {
-    console.error("[v0] Error in update event API:", error)
+    console.error("Error in update event API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
@@ -52,13 +52,13 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     const { error } = await supabase.from("events").delete().eq("id", id)
 
     if (error) {
-      console.error("[v0] Error deleting event:", error)
+      console.error("Error deleting event:", error)
       return NextResponse.json({ error: "Failed to delete event" }, { status: 500 })
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Error in delete event API:", error)
+    console.error("Error in delete event API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

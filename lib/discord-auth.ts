@@ -20,7 +20,7 @@ export async function getDiscordUser(accessToken: string): Promise<DiscordUser |
 
     return await response.json()
   } catch (error) {
-    console.error("[v0] Error fetching Discord user:", error)
+    console.error("Error fetching Discord user:", error)
     return null
   }
 }
@@ -65,14 +65,14 @@ export async function exchangeCodeForToken(code: string, redirectUri: string): P
     })
 
     if (!response.ok) {
-      console.error("[v0] Discord token exchange failed:", await response.text())
+      console.error("Discord token exchange failed:", await response.text())
       return null
     }
 
     const data = await response.json()
     return data.access_token
   } catch (error) {
-    console.error("[v0] Error exchanging Discord code:", error)
+    console.error("Error exchanging Discord code:", error)
     return null
   }
 }

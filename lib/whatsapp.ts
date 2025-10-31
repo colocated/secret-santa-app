@@ -9,7 +9,7 @@ export async function sendWhatsAppMessage(to: string, message: string): Promise<
     const apiUrl = process.env.WHATSAPP_API_URL
 
     if (!apiKey || !apiUrl) {
-      console.error("[v0] WhatsApp API credentials not configured")
+      console.error("WhatsApp API credentials not configured")
       return false
     }
 
@@ -26,13 +26,13 @@ export async function sendWhatsAppMessage(to: string, message: string): Promise<
     })
 
     if (!response.ok) {
-      console.error("[v0] WhatsApp API error:", await response.text())
+      console.error("WhatsApp API error:", await response.text())
       return false
     }
 
     return true
   } catch (error) {
-    console.error("[v0] Error sending WhatsApp message:", error)
+    console.error("Error sending WhatsApp message:", error)
     return false
   }
 }

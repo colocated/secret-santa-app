@@ -53,7 +53,7 @@ export function CreateEventDialog({ open, onOpenChange }: CreateEventDialogProps
       router.push(`/admin/events/${event.id}`)
       router.refresh()
     } catch (error) {
-      console.error("[v0] Error creating event:", error)
+      console.error("Error creating event:", error)
       toast.error("Failed to create event")
     } finally {
       setIsLoading(false)

@@ -21,13 +21,13 @@ export async function POST(request: NextRequest) {
       .eq("giver_id", participantId)
 
     if (error) {
-      console.error("[v0] Error updating pairing:", error)
+      console.error("Error updating pairing:", error)
       return NextResponse.json({ error: "Failed to update pairing" }, { status: 500 })
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Error in reveal-pairing API:", error)
+    console.error("Error in reveal-pairing API:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

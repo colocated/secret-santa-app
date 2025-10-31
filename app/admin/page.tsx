@@ -17,7 +17,7 @@ export default async function AdminPage() {
       .order("created_at", { ascending: false })
 
     if (error) {
-      console.error("[v0] Error fetching events:", error)
+      console.error("Error fetching events:", error)
     }
 
     return (

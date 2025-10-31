@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
     )
 
     if (dbError) {
-      console.error("[v0] Error storing admin user:", dbError)
+      console.error("Error storing admin user:", dbError)
     }
 
     // Create admin session
@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
 
     return response
   } catch (error) {
-    console.error("[v0] Error in Discord callback:", error)
+    console.error("Error in Discord callback:", error)
     return NextResponse.redirect(
       new URL(`/admin/login?error=${encodeURIComponent("An unexpected error occurred")}`, request.url),
     )

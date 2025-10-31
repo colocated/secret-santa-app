@@ -18,7 +18,6 @@ const geist = Geist({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Secret Santa - Holiday Gift Exchange",
   description: "Organize your Secret Santa gift exchange with ease",
-  generator: "v0.app",
 }
 
 export default async function RootLayout({

@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-1. A Supabase or Neon database (already connected via v0)
+1. A Supabase database
 2. Discord and/or Google OAuth applications
 3. WhatsApp API credentials (optional, for sending links via WhatsApp)
 4. SMTP credentials (optional, for sending links via email)
@@ -16,7 +16,7 @@
    - `scripts/004_add_auth_codes.sql` - Auth code system
    - `scripts/005_enhanced_admin_system.sql` - Enhanced admin features
    
-   In v0, you can run these scripts directly from the interface, or copy the SQL and run it in your Supabase/Neon dashboard.
+   Copy the SQL and run it in your Supabase dashboard.
 
 ## Discord OAuth Setup
 

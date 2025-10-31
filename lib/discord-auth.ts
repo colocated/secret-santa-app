@@ -6,17 +6,6 @@ export interface DiscordUser {
   email?: string
 }
 
-// Pre-approved admin Discord IDs - Add your Discord user IDs here
-export const APPROVED_ADMIN_IDS = [
-  // Add Discord user IDs here, e.g.:
-  // "123456789012345678",
-  // "987654321098765432",
-]
-
-export function isApprovedAdmin(discordId: string): boolean {
-  return APPROVED_ADMIN_IDS.includes(discordId)
-}
-
 export async function getDiscordUser(accessToken: string): Promise<DiscordUser | null> {
   try {
     const response = await fetch("https://discord.com/api/users/@me", {

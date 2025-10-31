@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { exchangeCodeForToken, getDiscordUser, isApprovedAdmin } from "@/lib/discord-auth"
+import { exchangeCodeForToken, getDiscordUser } from "@/lib/discord-auth"
 import { createClient } from "@/lib/supabase/server"
 
 export async function GET(request: NextRequest) {
@@ -33,16 +33,6 @@ export async function GET(request: NextRequest) {
     if (!discordUser) {
       return NextResponse.redirect(
         new URL(`/admin/login?error=${encodeURIComponent("Failed to fetch Discord user")}`, request.url),
-      )
-    }
-
-    // Check if user is approved admin
-    if (!isApprovedAdmin(discordUser.id)) {
-      return NextResponse.redirect(
-        new URL(
-          `/admin/login?error=${encodeURIComponent("You are not authorized to access the admin panel")}`,
-          request.url,
-        ),
       )
     }
 

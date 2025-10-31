@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Copy, Plus, Trash2, Send } from "lucide-react"
+import { Copy, Plus, Trash2, MessageCircle, Mail } from "lucide-react"
 import { toast } from "sonner"
 
 interface Participant {
@@ -86,33 +86,34 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
     }
   }
 
-  const handleSendLink = async (participant: Participant) => {
-    setIsSending(participant.id)
+  const handleSendLink = async (participant: Participant, method: "email" | "whatsapp") => {
+    return toast.error(`Link sending via ${method} is currently disabled.`)
+    // setIsSending(participant.id)
 
-    try {
-      const response = await fetch("/api/messaging/send-participant-links", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          eventId,
-          participantIds: [participant.id],
-        }),
-      })
+    // try {
+    //   const response = await fetch("/api/messaging/send-participant-links", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       eventId,
+    //       participantIds: [participant.id],
+    //     }),
+    //   })
 
-      if (!response.ok) throw new Error("Failed to send link")
+    //   if (!response.ok) throw new Error("Failed to send link")
 
-      const result = await response.json()
-      if (result.results[0].success) {
-        toast.success(`Link sent to ${participant.name}!`)
-      } else {
-        toast.error(`Failed to send link: ${result.results[0].error}`)
-      }
-    } catch (error) {
-      console.error("Error sending link:", error)
-      toast.error("Failed to send link")
-    } finally {
-      setIsSending(null)
-    }
+    //   const result = await response.json()
+    //   if (result.results[0].success) {
+    //     toast.success(`Link sent to ${participant.name}!`)
+    //   } else {
+    //     toast.error(`Failed to send link: ${result.results[0].error}`)
+    //   }
+    // } catch (error) {
+    //   console.error("Error sending link:", error)
+    //   toast.error("Failed to send link")
+    // } finally {
+    //   setIsSending(null)
+    // }
   }
 
   const copyLink = (link: string) => {
@@ -222,14 +223,24 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          {(participant.email || participant.phone_number) && (
+                          {(participant.email) && (
                             <Button
                               size="sm"
                               variant="outline"
-                              onClick={() => handleSendLink(participant)}
+                              onClick={() => handleSendLink(participant, "email")}
                               disabled={isSending === participant.id}
                             >
-                              <Send className="h-4 w-4" />
+                              <Mail className="h-4 w-4" />
+                            </Button>
+                          )}
+                          {(participant.phone_number) && (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleSendLink(participant, "whatsapp")}
+                              disabled={isSending === participant.id}
+                            >
+                              <MessageCircle className="h-4 w-4" />
                             </Button>
                           )}
                           <Button size="sm" variant="outline" onClick={() => copyLink(participant.unique_link)}>

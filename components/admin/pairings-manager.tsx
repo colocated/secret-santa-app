@@ -30,7 +30,6 @@ interface PairingsManagerProps {
 }
 
 export function PairingsManager({ eventId, participants, pairings, hidePairingsFromAdmins }: PairingsManagerProps) {
-  console.log(hidePairingsFromAdmins);
   const router = useRouter()
   const [isGenerating, setIsGenerating] = useState(false)
 

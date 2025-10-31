@@ -45,7 +45,6 @@ export async function GET(request: NextRequest) {
       .eq("discord_id", discordUser.id)
       .single()
 
-    console.log(adminError, admin)
     if (adminError || !admin) {
       return NextResponse.redirect(
         new URL(`/admin/login?error=${encodeURIComponent("You are not an approved admin for this instance")}`, request.url),

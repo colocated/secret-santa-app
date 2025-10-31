@@ -46,7 +46,7 @@ export function PresentationMode({ event, participants, pairings }: Presentation
     setRevealedPairing(null)
 
     // Find the pairing
-    const pairing = pairings.find((p) => p.giver.id === participantId)
+    const pairing = pairings.find((p) => p.receiver.id === participantId)
     if (!pairing) {
       setIsRevealing(false)
       return
@@ -69,7 +69,7 @@ export function PresentationMode({ event, participants, pairings }: Presentation
         setTimeout(cycleEmojis, interval)
       } else {
         setTimeout(() => {
-          setRevealedPairing(pairing.receiver.name)
+          setRevealedPairing(pairing.giver.name)
           setIsRevealing(false)
         }, 500)
       }
@@ -125,9 +125,9 @@ export function PresentationMode({ event, participants, pairings }: Presentation
           <div className="flex min-h-screen w-full flex-col items-center justify-center space-y-8">
             <div className="text-center">
               <h2 className="mb-4 font-(family-name:--font-christmas) text-4xl font-bold text-christmas-green md:text-6xl">
-                {participants.find((p) => p.id === selectedParticipant)?.name}
+                {participants.find((p) => p.id === selectedParticipant)?.name}'s
               </h2>
-              <p className="text-2xl text-foreground/80 md:text-3xl">is Secret Santa for...</p>
+              <p className="text-2xl text-foreground/80 md:text-3xl">Secret Santa was...</p>
             </div>
 
             {!revealedPairing ? (

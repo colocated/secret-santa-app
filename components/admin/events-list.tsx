@@ -58,8 +58,8 @@ export function EventsList({ events }: EventsListProps) {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <CardTitle className="text-xl">{event.title}</CardTitle>
-                  <Badge variant={event.status === "active" ? "default" : "secondary"} className="ml-2">
-                    {event.status}
+                  <Badge variant={event.status === "active" ? "secondary" : "default"} className="ml-2">
+                    {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
                   </Badge>
                 </div>
                 {event.description && <CardDescription>{event.description}</CardDescription>}

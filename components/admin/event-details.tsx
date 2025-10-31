@@ -47,8 +47,8 @@ export function EventDetails({ event, participants, pairings, hidePairingsFromAd
               </CardTitle>
               {event.description && <CardDescription className="mt-2 text-base">{event.description}</CardDescription>}
             </div>
-            <Badge variant={event.status === "active" ? "default" : "secondary"} className="text-base">
-              {event.status}
+            <Badge variant={event.status === "active" ? "secondary" : "default"} className="text-base">
+              {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
             </Badge>
           </div>
         </CardHeader>

@@ -35,7 +35,7 @@ export function AdminHeader({ user }: AdminHeaderProps) {
         <div className="flex items-center gap-4">
           <Link href="/admin" className="flex items-center gap-2">
             <span className="text-3xl">🎅</span>
-            <h2 className="font-[family-name:var(--font-christmas)] text-2xl font-bold text-christmas-red">
+            <h2 className="font-(family-name:--font-christmas) text-2xl font-bold text-christmas-red">
               Secret Santa Admin
             </h2>
           </Link>

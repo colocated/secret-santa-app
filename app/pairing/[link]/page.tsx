@@ -45,7 +45,7 @@ export default async function PairingPage({ params }: PairingPageProps) {
   // If auth codes are required and user is not verified, show verification
   if (event.require_auth_codes && !isVerified) {
     return (
-      <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="relative min-h-screen bg-linear-to-b from-blue-50 to-white">
         <Snowfall />
         <ChristmasDecorations />
         <main className="container relative z-10 mx-auto flex min-h-screen flex-col items-center justify-center px-4 py-16">
@@ -62,12 +62,12 @@ export default async function PairingPage({ params }: PairingPageProps) {
   // Check if event is closed
   if (event.status === "closed") {
     return (
-      <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="relative min-h-screen bg-linear-to-b from-blue-50 to-white">
         <Snowfall />
         <ChristmasDecorations />
         <main className="container relative z-10 mx-auto flex min-h-screen flex-col items-center justify-center px-4 py-16">
           <div className="text-center">
-            <h1 className="mb-4 font-[family-name:var(--font-christmas)] text-6xl font-bold text-christmas-red">
+            <h1 className="mb-4 font-(family-name:--font-christmas) text-6xl font-bold text-christmas-red">
               Event Closed
             </h1>
             <p className="text-xl text-foreground/80">
@@ -95,12 +95,12 @@ export default async function PairingPage({ params }: PairingPageProps) {
 
   if (pairingError || !pairing) {
     return (
-      <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="relative min-h-screen bg-linear-to-b from-blue-50 to-white">
         <Snowfall />
         <ChristmasDecorations />
         <main className="container relative z-10 mx-auto flex min-h-screen flex-col items-center justify-center px-4 py-16">
           <div className="text-center">
-            <h1 className="mb-4 font-[family-name:var(--font-christmas)] text-6xl font-bold text-christmas-red">
+            <h1 className="mb-4 font-(family-name:--font-christmas) text-6xl font-bold text-christmas-red">
               No Pairing Yet
             </h1>
             <p className="text-xl text-foreground/80">
@@ -113,7 +113,7 @@ export default async function PairingPage({ params }: PairingPageProps) {
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="relative min-h-screen bg-linear-to-b from-blue-50 to-white">
       <Snowfall />
       <ChristmasDecorations />
       <PairingReveal event={event} participant={participant} pairing={pairing} link={link} />

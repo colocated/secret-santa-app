@@ -21,12 +21,12 @@ export default async function AdminPage() {
     }
 
     return (
-      <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="relative min-h-screen bg-linear-to-b from-blue-50 to-white">
         <Snowfall />
         <AdminHeader user={session} />
         <main className="container relative z-10 mx-auto px-4 py-8">
           <div className="mb-8">
-            <h1 className="mb-2 font-[family-name:var(--font-christmas)] text-4xl font-bold text-christmas-red">
+            <h1 className="mb-2 font-(family-name:--font-christmas) text-4xl font-bold text-christmas-red">
               Secret Santa Admin Panel
             </h1>
             <p className="text-lg text-foreground/80">Manage your Secret Santa events and participants</p>

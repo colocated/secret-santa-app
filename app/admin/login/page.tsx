@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="relative min-h-screen bg-linear-to-b from-blue-50 to-white">
       <Snowfall />
       <ChristmasDecorations />
 
@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
         <Card className="w-full max-w-md border-4 border-christmas-red/20 bg-white/95 shadow-2xl backdrop-blur">
           <CardHeader className="text-center">
             <div className="mx-auto mb-4 text-6xl">🎅</div>
-            <CardTitle className="font-[family-name:var(--font-christmas)] text-3xl text-christmas-red">
+            <CardTitle className="font-(family-name:--font-christmas) text-3xl text-christmas-red">
               Admin Login
             </CardTitle>
             <CardDescription className="text-base">Sign in to manage Secret Santa events</CardDescription>

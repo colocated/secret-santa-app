@@ -92,7 +92,7 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
       {showConfetti && <Confetti />}
 
       <div className="mb-6 text-center sm:mb-8">
-        <h1 className="mb-2 font-[family-name:var(--font-christmas)] text-4xl font-bold text-christmas-red sm:text-5xl md:text-7xl">
+        <h1 className="mb-2 font-(family-name:--font-christmas) text-4xl font-bold text-christmas-red sm:text-5xl md:text-7xl">
           {event.title}
         </h1>
         {event.description && <p className="text-lg text-foreground/80 sm:text-xl md:text-2xl">{event.description}</p>}
@@ -100,7 +100,7 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
 
       <Card className="w-full max-w-2xl border-4 border-christmas-red/20 bg-white/95 shadow-2xl backdrop-blur">
         <CardHeader className="text-center">
-          <CardTitle className="font-[family-name:var(--font-christmas)] text-2xl text-christmas-green sm:text-3xl">
+          <CardTitle className="font-(family-name:--font-christmas) text-2xl text-christmas-green sm:text-3xl">
             {t("hello", { name: participant.name })}
           </CardTitle>
           <CardDescription className="text-base sm:text-lg">
@@ -113,7 +113,7 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
               <Button
                 onClick={handleReveal}
                 disabled={isAnimating}
-                className={`group relative h-40 w-40 rounded-3xl border-4 border-christmas-red bg-gradient-to-br from-christmas-red to-christmas-red/80 p-0 shadow-2xl transition-all hover:scale-105 hover:shadow-christmas-red/50 sm:h-48 sm:w-48 ${
+                className={`group relative h-40 w-40 rounded-3xl border-4 border-christmas-red bg-linear-to-br from-christmas-red to-christmas-red/80 p-0 shadow-2xl transition-all hover:scale-105 hover:shadow-christmas-red/50 sm:h-48 sm:w-48 ${
                   isAnimating ? "animate-pulse" : "hover:animate-bounce"
                 }`}
               >
@@ -132,7 +132,7 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
                 <div className="text-6xl sm:text-7xl">🎁</div>
                 <div className="space-y-2">
                   <p className="text-xl font-semibold text-foreground/80 sm:text-2xl">{t("youAreSecretSantaFor")}</p>
-                  <p className="font-[family-name:var(--font-christmas)] text-4xl font-bold text-christmas-red sm:text-5xl">
+                  <p className="font-(family-name:--font-christmas) text-4xl font-bold text-christmas-red sm:text-5xl">
                     {pairing.receiver.name}
                   </p>
                 </div>
@@ -149,7 +149,7 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
 
           {event.rules && event.rules.length > 0 && (
             <div className="rounded-lg border-2 border-christmas-green/30 bg-christmas-green-light p-4 sm:p-6">
-              <h3 className="mb-4 font-[family-name:var(--font-christmas)] text-xl font-bold text-christmas-green sm:text-2xl">
+              <h3 className="mb-4 font-(family-name:--font-christmas) text-xl font-bold text-christmas-green sm:text-2xl">
                 {t("eventRules")}
               </h3>
               <ul className="space-y-2">

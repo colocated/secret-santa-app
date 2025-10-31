@@ -47,13 +47,13 @@ export default function SetupOwnerPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-blue-50 to-white p-4">
+    <div className="flex min-h-screen items-center justify-center bg-linear-to-b from-blue-50 to-white p-4">
       <Card className="w-full max-w-md border-4 border-christmas-gold/30 bg-white/95 shadow-2xl backdrop-blur">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-christmas-gold/20">
             <Crown className="h-8 w-8 text-christmas-gold" />
           </div>
-          <CardTitle className="font-[family-name:var(--font-christmas)] text-3xl text-christmas-red">
+          <CardTitle className="font-(family-name:--font-christmas) text-3xl text-christmas-red">
             {t("systemOwnerSetup")}
           </CardTitle>
           <CardDescription className="text-base">{t("enterOwnerCode")}</CardDescription>

@@ -47,7 +47,7 @@ export default async function EventPage({ params }: EventPageProps) {
     const hidePairingsFromAdmins = event.hide_pairings_from_admins;
 
     return (
-      <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="relative min-h-screen bg-linear-to-b from-blue-50 to-white">
         <Snowfall />
         <AdminHeader user={session} />
         <main className="container relative z-10 mx-auto px-4 py-8">

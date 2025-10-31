@@ -85,7 +85,7 @@ export function PresentationMode({ event, participants, pairings }: Presentation
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-christmas-red/10 via-white to-christmas-green/10">
+    <div className="relative min-h-screen bg-linear-to-br from-christmas-red/10 via-white to-christmas-green/10">
       <Snowfall />
 
       {/* Exit button */}
@@ -101,7 +101,7 @@ export function PresentationMode({ event, participants, pairings }: Presentation
           // Participant selection grid
           <div className="w-full max-w-6xl space-y-8">
             <div className="text-center">
-              <h1 className="mb-2 font-[family-name:var(--font-christmas)] text-5xl font-bold text-christmas-red md:text-7xl">
+              <h1 className="mb-2 font-(family-name:--font-christmas) text-5xl font-bold text-christmas-red md:text-7xl">
                 {event.title}
               </h1>
               {event.description && <p className="text-xl text-foreground/80 md:text-2xl">{event.description}</p>}
@@ -124,7 +124,7 @@ export function PresentationMode({ event, participants, pairings }: Presentation
           // Reveal animation
           <div className="flex min-h-screen w-full flex-col items-center justify-center space-y-8">
             <div className="text-center">
-              <h2 className="mb-4 font-[family-name:var(--font-christmas)] text-4xl font-bold text-christmas-green md:text-6xl">
+              <h2 className="mb-4 font-(family-name:--font-christmas) text-4xl font-bold text-christmas-green md:text-6xl">
                 {participants.find((p) => p.id === selectedParticipant)?.name}
               </h2>
               <p className="text-2xl text-foreground/80 md:text-3xl">is Secret Santa for...</p>
@@ -140,7 +140,7 @@ export function PresentationMode({ event, participants, pairings }: Presentation
             ) : (
               <div className="animate-in fade-in zoom-in duration-1000 space-y-6 text-center">
                 <div className="text-8xl md:text-9xl">🎁</div>
-                <p className="font-[family-name:var(--font-christmas)] text-6xl font-bold text-christmas-red md:text-8xl">
+                <p className="font-(family-name:--font-christmas) text-6xl font-bold text-christmas-red md:text-8xl">
                   {revealedPairing}
                 </p>
                 <div className="mt-8 flex items-center justify-center gap-4 text-5xl">

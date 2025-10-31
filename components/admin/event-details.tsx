@@ -42,7 +42,7 @@ export function EventDetails({ event, participants, pairings, hidePairingsFromAd
         <CardHeader>
           <div className="flex items-start justify-between">
             <div>
-              <CardTitle className="font-[family-name:var(--font-christmas)] text-3xl text-christmas-red">
+              <CardTitle className="font-(family-name:--font-christmas) text-3xl text-christmas-red">
                 {event.title}
               </CardTitle>
               {event.description && <CardDescription className="mt-2 text-base">{event.description}</CardDescription>}

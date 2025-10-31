@@ -90,7 +90,7 @@ export function AuthCodeVerification({ participantId, participantName, onVerifie
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-christmas-green/10">
             <Shield className="h-8 w-8 text-christmas-green" />
           </div>
-          <CardTitle className="font-[family-name:var(--font-christmas)] text-3xl text-christmas-red">
+          <CardTitle className="font-(family-name:--font-christmas) text-3xl text-christmas-red">
             {t("authRequired")}
           </CardTitle>
           <CardDescription className="text-base">

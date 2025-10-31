@@ -22,7 +22,7 @@ export default function HomePage() {
   }, [router])
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="relative min-h-screen bg-linear-to-b from-blue-50 to-white">
       <Snowfall />
       <ChristmasDecorations />
 
@@ -32,7 +32,7 @@ export default function HomePage() {
 
       <main className="container relative z-10 mx-auto flex min-h-screen flex-col items-center justify-center px-4 py-16 sm:py-20">
         <div className="mb-6 text-center sm:mb-8">
-          <h1 className="mb-4 font-[family-name:var(--font-christmas)] text-5xl font-bold text-christmas-red sm:text-6xl md:text-8xl">
+          <h1 className="mb-4 font-(family-name:--font-christmas) text-5xl font-bold text-christmas-red sm:text-6xl md:text-8xl">
             {t("title")}
           </h1>
           <p className="text-xl text-christmas-green sm:text-2xl md:text-3xl">{t("subtitle")}</p>
@@ -41,7 +41,7 @@ export default function HomePage() {
         <Card className="w-full max-w-2xl border-4 border-christmas-red/20 bg-white/95 shadow-2xl backdrop-blur">
           <CardHeader className="space-y-4 text-center">
             <div className="mx-auto text-5xl sm:text-7xl">🎅</div>
-            <CardTitle className="font-[family-name:var(--font-christmas)] text-3xl text-christmas-red sm:text-4xl">
+            <CardTitle className="font-(family-name:--font-christmas) text-3xl text-christmas-red sm:text-4xl">
               {t("welcome")}
             </CardTitle>
             <CardDescription className="text-base text-foreground/80 sm:text-lg">{t("description")}</CardDescription>

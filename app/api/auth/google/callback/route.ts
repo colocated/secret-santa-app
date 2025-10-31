@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const error = searchParams.get("error")
 
     if (error || !code) {
-      return NextResponse.redirect(new URL("/admin/login?error=google_auth_failed", request.url))
+      return NextResponse.redirect(new URL(`/admin/login?error=${encodeURIComponent("Google authentication failed")}`, request.url))
     }
 
     const redirectUri = `${request.nextUrl.origin}/api/auth/google/callback`
@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
       .single()
 
     if (adminError || !admin) {
-      return NextResponse.redirect(new URL("/admin/login?error=not_authorized", request.url))
+      return NextResponse.redirect(new URL(`/admin/login?error=${encodeURIComponent("You are not an approved admin for this instance")}`, request.url))
     }
 
     // Create session
@@ -85,6 +85,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(new URL("/admin", request.url))
   } catch (error) {
     console.error("Error in Google callback:", error)
-    return NextResponse.redirect(new URL("/admin/login?error=google_auth_failed", request.url))
+    return NextResponse.redirect(new URL(`/admin/login?error=${encodeURIComponent("Google authentication failed")}`, request.url))
   }
 }

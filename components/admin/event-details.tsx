@@ -25,6 +25,7 @@ interface EventDetailsProps {
     email: string | null
     phone_number?: string | null
     country_code?: string | null
+    moodboard?: string[] | null
     unique_link: string
   }>
   pairings: Array<{

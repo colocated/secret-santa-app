@@ -90,6 +90,7 @@ export default async function PairingPage({ params }: PairingPageProps) {
         id,
         name,
         email,
+        moodboard
       )
     `)
     .eq("giver_id", participant.id)

@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const { eventId, name, email, phoneNumber, countryCode } = await request.json()
+  const { eventId, name, email, phoneNumber, countryCode, moodboard } = await request.json()
 
     if (!eventId || !name) {
       return NextResponse.json({ error: "Event ID and name are required" }, { status: 400 })
@@ -30,6 +30,8 @@ export async function POST(request: NextRequest) {
         phone_number: phoneNumber || null,
         country_code: countryCode || null,
         unique_link: uniqueLink,
+        // store moodboard as text[]; expect client to send array of strings or null
+        moodboard: Array.isArray(moodboard) ? moodboard : (moodboard ? [String(moodboard)] : []),
       })
       .select()
       .single()

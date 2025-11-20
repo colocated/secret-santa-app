@@ -25,3 +25,4 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
+// Note: participant updates (other than delete) are handled by specific endpoints (e.g. moodboard)

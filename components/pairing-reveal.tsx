@@ -21,6 +21,7 @@ interface PairingRevealProps {
     revealed: boolean
     receiver: {
       name: string
+      moodboard?: string[] | null
     }
   }
   link: string
@@ -108,7 +109,7 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6 sm:space-y-8">
-          <div className="flex flex-col items-center justify-center py-6 sm:py-8">
+          <div className="flex flex-col items-center justify-center py-4 sm:py-8">
             {!isRevealed ? (
               <Button
                 onClick={handleReveal}
@@ -141,6 +142,22 @@ export function PairingReveal({ event, participant, pairing, link }: PairingReve
               </div>
             )}
           </div>
+
+            {pairing.receiver.moodboard && pairing.receiver.moodboard.length > 0 && (
+            <div className="rounded-lg border-2 border-christmas-red/30 bg-christmas-red/10 p-4 sm:p-6">
+              <h3 className="mb-4 font-(family-name:--font-christmas) text-xl font-bold text-christmas-red sm:text-2xl">
+              {t("giftIdeasAndNotes")}
+              </h3>
+              <ul className="space-y-2">
+              {pairing.receiver.moodboard.map((item: string, index: number) => (
+                <li key={index} className="flex items-start gap-3">
+                <span className="text-christmas-red">•</span>
+                <span className="text-sm text-foreground/80 sm:text-base">{item}</span>
+                </li>
+              ))}
+              </ul>
+            </div>
+            )}
 
           {event.rules && event.rules.length > 0 && (
             <div className="rounded-lg border-2 border-christmas-green/30 bg-christmas-green-light p-4 sm:p-6">

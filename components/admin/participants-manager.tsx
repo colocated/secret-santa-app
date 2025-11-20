@@ -10,7 +10,16 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Copy, Plus, Trash2, MessageCircle, Mail } from "lucide-react"
+import { Copy, Plus, Trash2, MessageCircle, Mail, Edit } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog"
 import { toast } from "sonner"
 
 interface Participant {
@@ -20,6 +29,7 @@ interface Participant {
   phone_number?: string | null
   country_code?: string | null
   unique_link: string
+  moodboard?: string[] | null
 }
 
 interface ParticipantsManagerProps {
@@ -36,6 +46,7 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
     email: "",
     phoneNumber: "",
     countryCode: "+1",
+    moodboardText: "",
   })
 
   const handleAddParticipant = async (e: React.FormEvent) => {
@@ -46,19 +57,23 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
       const response = await fetch("/api/admin/participants", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          eventId,
-          name: newParticipant.name,
-          email: newParticipant.email || null,
-          phoneNumber: newParticipant.phoneNumber || null,
-          countryCode: newParticipant.countryCode,
-        }),
+          body: JSON.stringify({
+            eventId,
+            name: newParticipant.name,
+            email: newParticipant.email || null,
+            phoneNumber: newParticipant.phoneNumber || null,
+            countryCode: newParticipant.countryCode,
+            // Split textarea by newlines into array of trimmed non-empty strings
+            moodboard: newParticipant.moodboardText
+              ? newParticipant.moodboardText.split(/\r?\n/).map((s) => s.trim()).filter(Boolean)
+              : [],
+          }),
       })
 
       if (!response.ok) throw new Error("Failed to add participant")
 
       toast.success("Participant added successfully!")
-      setNewParticipant({ name: "", email: "", phoneNumber: "", countryCode: "+1" })
+    setNewParticipant({ name: "", email: "", phoneNumber: "", countryCode: "+1", moodboardText: "" })
       router.refresh()
     } catch (error) {
       console.error("Error adding participant:", error)
@@ -116,6 +131,48 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
     // }
   }
 
+  const handleEditParticipant = async (participant: Participant) => {
+    // Deprecated: handled via modal
+  }
+
+  // Modal state for editing moodboard
+  const [isMoodboardOpen, setIsMoodboardOpen] = useState(false)
+  const [editingParticipant, setEditingParticipant] = useState<Participant | null>(null)
+  const [moodboardEditorText, setMoodboardEditorText] = useState("")
+  const [isSavingMoodboard, setIsSavingMoodboard] = useState(false)
+
+  const openMoodboardEditor = (participant: Participant) => {
+    setEditingParticipant(participant)
+    setMoodboardEditorText(participant.moodboard ? participant.moodboard.join("\n") : "")
+    setIsMoodboardOpen(true)
+  }
+
+  const handleSaveMoodboard = async () => {
+    if (!editingParticipant) return
+    const moodboard = moodboardEditorText ? moodboardEditorText.split(/\r?\n/).map((s) => s.trim()).filter(Boolean) : []
+    setIsSavingMoodboard(true)
+    try {
+      const response = await fetch(`/api/admin/participants/${editingParticipant.id}/moodboard`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ moodboard }),
+      })
+
+      if (!response.ok) throw new Error("Failed to update participant")
+
+      toast.success("Moodboard saved")
+      setIsMoodboardOpen(false)
+      setEditingParticipant(null)
+      setMoodboardEditorText("")
+      router.refresh()
+    } catch (error) {
+      console.error("Error saving moodboard:", error)
+      toast.error("Failed to save moodboard")
+    } finally {
+      setIsSavingMoodboard(false)
+    }
+  }
+
   const copyLink = (link: string) => {
     const fullUrl = `${window.location.origin}/pairing/${link}`
     navigator.clipboard.writeText(fullUrl)
@@ -131,7 +188,7 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
         </CardHeader>
         <CardContent>
           <form onSubmit={handleAddParticipant} className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">Name *</Label>
                 <Input
@@ -181,6 +238,17 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
                   />
                 </div>
               </div>
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="moodboard">Moodboard (one item per line)</Label>
+                <textarea
+                  id="moodboard"
+                  placeholder={"e.g. Loves coffee\nNo pets\nAllergic to nuts"}
+                  value={newParticipant.moodboardText}
+                  onChange={(e) => setNewParticipant({ ...newParticipant, moodboardText: e.target.value })}
+                  className="w-full rounded border bg-transparent p-2 text-sm"
+                  rows={4}
+                />
+              </div>
             </div>
             <Button type="submit" disabled={isAdding} className="bg-christmas-green hover:bg-christmas-green/90">
               <Plus className="mr-2 h-4 w-4" />
@@ -206,6 +274,7 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
                     <TableHead>Name</TableHead>
                     <TableHead>Email</TableHead>
                     <TableHead>Phone</TableHead>
+                    <TableHead>Moodboard</TableHead>
                     <TableHead>Unique Link</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
@@ -217,6 +286,21 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
                       <TableCell>{participant.email || "-"}</TableCell>
                       <TableCell>
                         {participant.phone_number ? `${participant.country_code}${participant.phone_number}` : "-"}
+                      </TableCell>
+                      <TableCell className="flex items-center gap-2">
+                        {participant.moodboard && participant.moodboard.length > 0 ? (
+                          <span className="text-sm text-foreground/90">{participant.moodboard.length} item(s)</span>
+                        ) : (
+                          <span className="text-muted-foreground">No items</span>
+                        )}
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => openMoodboardEditor(participant)}
+                          title={`Edit moodboard for ${participant.name}`}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
                       </TableCell>
                       <TableCell>
                         <code className="rounded bg-muted px-2 py-1 text-xs">{participant.unique_link}</code>
@@ -263,6 +347,36 @@ export function ParticipantsManager({ eventId, participants }: ParticipantsManag
           )}
         </CardContent>
       </Card>
+
+      <Dialog open={isMoodboardOpen} onOpenChange={setIsMoodboardOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Moodboard</DialogTitle>
+            <DialogDescription>
+              Edit the moodboard items for {editingParticipant?.name}. One item per line.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="mt-2">
+            <textarea
+              value={moodboardEditorText}
+              onChange={(e) => setMoodboardEditorText(e.target.value)}
+              rows={8}
+              className="w-full rounded border bg-transparent p-2 text-sm"
+            />
+          </div>
+
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button onClick={handleSaveMoodboard} disabled={isSavingMoodboard}>
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
     </div>
   )
 }

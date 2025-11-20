@@ -16,6 +16,8 @@ export interface Participant {
   event_id: string
   name: string
   email: string | null
+  // Optional moodboard: bullet points with likes/dislikes
+  moodboard?: string[] | null
   unique_link: string
   created_at: string
 }

@@ -17,11 +17,14 @@ interface EventDetailsProps {
     rules: string[]
     status: "active" | "closed"
     closure_message: string | null
+    hide_pairings_from_admins: boolean
   }
   participants: Array<{
     id: string
     name: string
     email: string | null
+    phone_number?: string | null
+    country_code?: string | null
     unique_link: string
   }>
   pairings: Array<{

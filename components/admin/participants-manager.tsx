@@ -17,8 +17,8 @@ interface Participant {
   id: string
   name: string
   email: string | null
-  phone_number: string | null
-  country_code: string | null
+  phone_number?: string | null
+  country_code?: string | null
   unique_link: string
 }
 

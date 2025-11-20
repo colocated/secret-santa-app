@@ -89,7 +89,7 @@ export default async function PairingPage({ params }: PairingPageProps) {
       receiver:receiver_id (
         id,
         name,
-        email
+        email,
       )
     `)
     .eq("giver_id", participant.id)
